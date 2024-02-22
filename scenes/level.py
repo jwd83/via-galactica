@@ -8,7 +8,8 @@ class Level(Scene):
         super().__init__(game)
 
     def update(self):
-        pass
+        if pygame.K_ESCAPE in self.game.just_pressed:
+            self.game.scene_push = "Menu"
 
     def draw(self):
         # draw a circle in the middle of the screen
