@@ -7,7 +7,7 @@ class Title(scene.Scene):
     def __init__(self, game):
         super().__init__(game)
         # make text of the game
-        self.text_via = self.game.make_text(
+        self.text_via = self.make_text(
             text="via",
             color=(255, 0, 255),
             fontSize=180,
@@ -15,7 +15,7 @@ class Title(scene.Scene):
             strokeColor=(255, 255, 255),
             strokeThickness=3,
         )
-        self.text_galactica = self.game.make_text(
+        self.text_galactica = self.make_text(
             text="galactica",
             color=(100, 100, 255),
             fontSize=60,
@@ -23,7 +23,7 @@ class Title(scene.Scene):
             strokeColor=(255, 255, 255),
             strokeThickness=2,
         )
-        self.text_road = self.game.make_text(
+        self.text_road = self.make_text(
             text="the road of",
             color=(255, 0, 255),
             fontSize=50,
@@ -31,7 +31,7 @@ class Title(scene.Scene):
             strokeColor=(255, 255, 255),
             strokeThickness=2,
         )
-        self.text_milk = self.game.make_text(
+        self.text_milk = self.make_text(
             text="milk",
             color=(255, 255, 255),
             fontSize=128,
@@ -40,7 +40,7 @@ class Title(scene.Scene):
             strokeThickness=3,
         )
 
-        self.text_press_enter = self.game.make_text(
+        self.text_press_enter = self.make_text(
             text="press enter to start",
             color=(255, 255, 255),
             fontSize=30,
@@ -79,21 +79,21 @@ class Title(scene.Scene):
         )
         self.screen.blit(self.img_ship, self.img_ship_rect)
 
-        self.game.blit_centered(
+        self.blit_centered(
             source=self.text_galactica,
             target=self.screen,
             position=(0.5, progress * 0.42),
         )
-        self.game.blit_centered(
+        self.blit_centered(
             source=self.text_via, target=self.screen, position=(progress * 0.5, 0.2)
         )
 
-        self.game.blit_centered(
+        self.blit_centered(
             source=self.text_road,
             target=self.screen,
             position=(1 - progress * 0.5, 0.55),
         )
-        self.game.blit_centered(
+        self.blit_centered(
             source=self.text_milk,
             target=self.screen,
             position=(0.5, 0.7 + (1 - progress) * 0.5),
@@ -101,6 +101,6 @@ class Title(scene.Scene):
 
         if progress >= 1:
 
-            self.game.blit_centered(
+            self.blit_centered(
                 source=self.text_press_enter, target=self.screen, position=(0.5, 0.9)
             )

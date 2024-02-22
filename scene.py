@@ -1,6 +1,7 @@
 import time
 import math
 import pygame
+import settings
 
 
 class Scene:
@@ -154,3 +155,71 @@ class Scene:
         shape_surf = pygame.Surface(pygame.Rect(rect).size, pygame.SRCALPHA)
         pygame.draw.rect(shape_surf, color, shape_surf.get_rect())
         surface.blit(shape_surf, rect)
+
+    def make_transparent_surface(self, size):
+        return pygame.Surface(size, pygame.SRCALPHA, 32).convert_alpha()
+
+    def make_text(
+        self,
+        text,
+        color,
+        fontSize,
+        font=None,
+        stroke=False,
+        strokeColor=(0, 0, 0),
+        strokeThickness=1,
+    ):
+        if font is None:
+            font = "assets/fonts/" + settings.FONT
+
+        # if we aren't stroking return the text directly
+        if not stroke:
+            return pygame.font.Font(font, fontSize).render(text, 1, color)
+
+        # if we are stroking, render the text with the stroke
+        # first render the text without the stroke
+
+        # create a version of the text in the stroke color and blit it to the surface
+        surf_text = pygame.font.Font(font, fontSize).render(text, 1, color)
+        surf_text_stroke = pygame.font.Font(font, fontSize).render(text, 1, strokeColor)
+
+        # create a transparent surface to draw the text and stroke on
+        size = (
+            surf_text.get_width() + strokeThickness * 3,
+            surf_text.get_height() + strokeThickness * 3,
+        )
+        surface = self.make_transparent_surface(size)
+
+        # blit the stroke text to the surface
+        for i in range(strokeThickness * 2 + 1):
+            for j in range(strokeThickness * 2 + 1):
+                surface.blit(surf_text_stroke, (i, j))
+
+        # blit the text on top of the stroke
+        surface.blit(surf_text, (strokeThickness, strokeThickness))
+
+        # return the surface
+        return surface
+
+    def blit_centered(self, source, target, position=(0.5, 0.5)):
+        """
+        This function places a given surface at a specified position on the target surface.
+
+        Parameters:
+        source (pygame.Surface): The source surface to be placed. This is a pygame Surface object, which can be
+        created using pygame.font.Font.render() method.
+
+        target (pygame.Surface): The target surface on which the surface is to be placed. This could be
+        the game screen or any other surface.
+
+        position (tuple): A tuple of two values between 0 and 1, representing the relative position
+        on the target surface where the surface should be placed. The values correspond to the horizontal
+        and vertical position respectively. For example, a position of (0.5, 0.5) will place the text dead
+        center on the target surface.
+
+
+        """
+        source_position = source.get_rect()
+        source_position.centerx = target.get_rect().centerx * position[0] * 2
+        source_position.centery = target.get_rect().centery * position[1] * 2
+        target.blit(source, source_position)
