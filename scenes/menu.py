@@ -26,11 +26,15 @@ class Menu(Scene):
             strokeThickness=2,
         )
 
+        self.img_cursor, _ = self.load_png("cursor-4x7.png")
+
+        self.play_sound("click")
+
     def update(self):
         if pygame.K_ESCAPE in self.game.just_pressed:
             self.game.quit = True
 
     def draw(self):
-        # draw a circle in the middle of the screen
         self.blit_centered(self.text_options, self.screen, (0.5, 0.1))
         self.blit_centered(self.text_quit, self.screen, (0.5, 0.8))
+        self.screen.blit(self.img_cursor, (0, 0))

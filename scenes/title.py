@@ -50,7 +50,7 @@ class Title(scene.Scene):
         )
 
         # load the title_ship.png image
-        self.img_ship, self.img_ship_rect = self.game.load_png("title_ship.png")
+        self.img_ship, self.img_ship_rect = self.load_png("title_ship.png")
 
         # resize to 1/4 of the original size
         self.img_ship = pygame.transform.scale(

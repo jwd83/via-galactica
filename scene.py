@@ -2,13 +2,14 @@ import time
 import math
 import pygame
 import settings
+import os
 
 
 class Scene:
     def __init__(self, game):
         self.game = game
         self.active = True
-        self.screen = game.screen
+        self.screen: pygame.Surface = game.screen
         self.start = time.time()
         self.shadow_intensity = 100
         self.shadow_depth = 3
@@ -223,3 +224,32 @@ class Scene:
         source_position.centerx = target.get_rect().centerx * position[0] * 2
         source_position.centery = target.get_rect().centery * position[1] * 2
         target.blit(source, source_position)
+
+    def play_sound(self, sound):
+        # verify the sound is loaded
+        if sound not in self.game.sfx:
+            print("Sound not found: " + sound)
+            return
+
+        print("play_sound: " + sound)
+
+        # set the volume of the sound based on the settings
+        self.game.sfx[sound].set_volume(self.game.volume_effects / 100)
+
+        pygame.mixer.Sound.play(self.game.sfx[sound])
+
+    # from the pygame tutorial:
+    # https://www.pygame.org/docs/tut/tom_games3.html
+    def load_png(self, name):
+        """Load image and return image object"""
+        fullname = os.path.join("assets/images", name)
+        try:
+            image = pygame.image.load(fullname)
+            if image.get_alpha() is None:
+                image = image.convert()
+            else:
+                image = image.convert_alpha()
+        except FileNotFoundError:
+            print(f"Cannot load image: {fullname}")
+            raise SystemExit
+        return image, image.get_rect()

@@ -12,7 +12,7 @@ class Game:
         self.quit = False
         self.pressed = []
         self.just_pressed = []
-        self.__sfx = {}
+        self.sfx = {}
         self.volume_music = 100
         self.volume_effects = 100
         self.winner = None
@@ -20,10 +20,6 @@ class Game:
         # initialize pygame
         pygame.init()
         pygame.mixer.init()
-
-        # load our sound effects
-        # for sound in settings.SFX_LIST:
-        #     self.__sfx[sound] = pygame.mixer.Sound("assets/" + sound)
 
         # load all sounds in assets/sounds as sound effects
         for sound in os.listdir("assets/sounds"):
@@ -37,7 +33,7 @@ class Game:
 
             if load_sound:
                 sound_name = sound.split(".")[0]
-                self.__sfx[sound_name] = pygame.mixer.Sound("assets/sounds/" + sound)
+                self.sfx[sound_name] = pygame.mixer.Sound("assets/sounds/" + sound)
 
         # create a window
         self.screen = pygame.display.set_mode(
@@ -176,25 +172,3 @@ class Game:
         #     return eval("scenes." + scene + "(self)")
         # else:
         #     return scenes.Title(self)
-
-    # from the pygame tutorial:
-    # https://www.pygame.org/docs/tut/tom_games3.html
-    def load_png(self, name):
-        """Load image and return image object"""
-        fullname = os.path.join("assets/images", name)
-        try:
-            image = pygame.image.load(fullname)
-            if image.get_alpha() is None:
-                image = image.convert()
-            else:
-                image = image.convert_alpha()
-        except FileNotFoundError:
-            print(f"Cannot load image: {fullname}")
-            raise SystemExit
-        return image, image.get_rect()
-
-    def play_sound(self, sound):
-        # set the volume of the sound based on the settings
-        self.__sfx[sound].set_volume(self.volume_effects / 100)
-
-        pygame.mixer.Sound.play(self.__sfx[sound])
