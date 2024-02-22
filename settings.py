@@ -4,7 +4,6 @@
 RESOLUTION = (640, 360)
 FPS = 60
 TITLE = "Roy2"
-SCENE_LIST = ["Debug", "Title", "Logo", "Starfield"]
 SCENE_START = "Logo"
 FONT = "upheavtt.ttf"
 DEBUG = False

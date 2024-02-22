@@ -17,10 +17,10 @@ class Title(scene.Scene):
         )
         self.text_galactica = self.make_text(
             text="galactica",
-            color=(100, 100, 255),
+            color=(255, 255, 255),
             fontSize=60,
             stroke=True,
-            strokeColor=(255, 255, 255),
+            strokeColor=(100, 100, 255),
             strokeThickness=2,
         )
         self.text_road = self.make_text(
@@ -68,6 +68,11 @@ class Title(scene.Scene):
         # if escape was pressed quit the game
         if pygame.K_ESCAPE in self.game.just_pressed:
             self.game.quit = True
+
+        # if enter was pressed start the game
+        if pygame.K_RETURN in self.game.just_pressed:
+            self.game.scene_pop = True
+            self.game.scene_push = "Level"
 
     def draw(self):
         progress = self.constrain(self.elapsed() / 1, 0, 1)
