@@ -3,6 +3,7 @@ import pygame
 import settings
 from scene import Scene
 import scenes
+import sys
 
 
 class Game:
@@ -61,6 +62,10 @@ class Game:
         self.debug_scene = scenes.Debug(self)
 
         while not self.quit:
+
+            # process scene change requests (if any)
+            self.change_scenes()
+
             # handle events and input
             self.get_events_and_input()
 
@@ -84,11 +89,13 @@ class Game:
             # update the display
             pygame.display.flip()
 
-            # process scene change requests (if any)
-            self.change_scenes()
-
             # limit the game to 60 fps
             self.clock.tick(settings.FPS)
+
+        # quit the game
+        print("quit=True")
+        pygame.quit()
+        sys.exit()
 
     def get_events_and_input(self):
         # get input
