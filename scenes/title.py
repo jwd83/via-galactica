@@ -16,12 +16,28 @@ class Title(scene.Scene):
             strokeThickness=3,
         )
         self.text_galactica = self.game.make_text(
-            text="GALACTICA",
+            text="galactica",
             color=(100, 100, 255),
             fontSize=60,
             stroke=True,
             strokeColor=(255, 255, 255),
             strokeThickness=2,
+        )
+        self.text_road = self.game.make_text(
+            text="the road of",
+            color=(255, 0, 255),
+            fontSize=50,
+            stroke=True,
+            strokeColor=(255, 255, 255),
+            strokeThickness=2,
+        )
+        self.text_milk = self.game.make_text(
+            text="milk",
+            color=(255, 255, 255),
+            fontSize=128,
+            stroke=True,
+            strokeColor=(100, 100, 255),
+            strokeThickness=3,
         )
 
         self.text_press_enter = self.game.make_text(
@@ -66,14 +82,25 @@ class Title(scene.Scene):
         self.game.blit_centered(
             source=self.text_galactica,
             target=self.screen,
-            position=(0.5, progress * 0.45),
+            position=(0.5, progress * 0.42),
         )
         self.game.blit_centered(
             source=self.text_via, target=self.screen, position=(progress * 0.5, 0.2)
         )
 
+        self.game.blit_centered(
+            source=self.text_road,
+            target=self.screen,
+            position=(1 - progress * 0.5, 0.55),
+        )
+        self.game.blit_centered(
+            source=self.text_milk,
+            target=self.screen,
+            position=(0.5, 0.7 + (1 - progress) * 0.5),
+        )
+
         if progress >= 1:
 
             self.game.blit_centered(
-                source=self.text_press_enter, target=self.screen, position=(0.5, 0.7)
+                source=self.text_press_enter, target=self.screen, position=(0.5, 0.9)
             )
