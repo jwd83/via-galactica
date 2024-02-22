@@ -24,6 +24,7 @@ class Logo(Scene):
         if (
             pygame.K_RETURN in self.game.just_pressed
             or pygame.K_SPACE in self.game.just_pressed
+            or pygame.K_ESCAPE in self.game.just_pressed
         ):
             self.game.scene_replace = "Starfield"
 
