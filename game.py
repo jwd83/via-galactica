@@ -36,7 +36,7 @@ class Game:
                 self.sfx[sound_name] = pygame.mixer.Sound("assets/sounds/" + sound)
 
         # create a window
-        self.screen = pygame.display.set_mode(
+        self.screen : pygame.Surface = pygame.display.set_mode(
             settings.RESOLUTION, pygame.FULLSCREEN | pygame.SCALED
         )
         pygame.display.set_caption(settings.TITLE)
