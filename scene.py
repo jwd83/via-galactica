@@ -13,6 +13,7 @@ class Scene:
         self.start = time.time()
         self.shadow_intensity = 100
         self.shadow_depth = 3
+        self.box_delay = 0.25
 
     def elapsed(self):
         return time.time() - self.start

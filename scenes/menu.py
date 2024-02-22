@@ -11,18 +11,18 @@ class Menu(Scene):
         self.text_options = self.make_text(
             text="options",
             color=(255, 255, 255),
-            fontSize=30,
+            fontSize=40,
             stroke=True,
-            strokeColor=(255, 100, 100),
+            strokeColor=(0, 0, 0),
             strokeThickness=2,
         )
 
         self.text_quit = self.make_text(
             text="quit",
             color=(200, 200, 200),
-            fontSize=30,
+            fontSize=40,
             stroke=True,
-            strokeColor=(255, 100, 200),
+            strokeColor=(0, 0, 0),
             strokeThickness=2,
         )
 
@@ -35,6 +35,11 @@ class Menu(Scene):
             self.game.quit = True
 
     def draw(self):
-        self.blit_centered(self.text_options, self.screen, (0.5, 0.1))
-        self.blit_centered(self.text_quit, self.screen, (0.5, 0.8))
-        self.screen.blit(self.img_cursor, (0, 0))
+        self.draw_box(
+            (100, 50), (settings.RESOLUTION[0] - 200, settings.RESOLUTION[1] - 100)
+        )
+        if self.elapsed() > self.box_delay:
+
+            self.blit_centered(self.text_options, self.screen, (0.5, 0.2))
+            self.blit_centered(self.text_quit, self.screen, (0.5, 0.8))
+            self.screen.blit(self.img_cursor, (0, 0))
