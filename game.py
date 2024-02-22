@@ -194,14 +194,15 @@ class Game:
         )
         surface = self.make_transparent_surface(size)
 
+        # blit the stroke text to the surface
         for i in range(strokeThickness * 2 + 1):
             for j in range(strokeThickness * 2 + 1):
-                print(i, j)
                 surface.blit(surf_text_stroke, (i, j))
 
         # blit the text on top of the stroke
         surface.blit(surf_text, (strokeThickness, strokeThickness))
 
+        # return the surface
         return surface
 
     def make_transparent_surface(self, size):
