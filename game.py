@@ -36,7 +36,7 @@ class Game:
                 self.sfx[sound_name] = pygame.mixer.Sound("assets/sounds/" + sound)
 
         # create a window
-        self.screen : pygame.Surface = pygame.display.set_mode(
+        self.screen: pygame.Surface = pygame.display.set_mode(
             settings.RESOLUTION, pygame.FULLSCREEN | pygame.SCALED
         )
         pygame.display.set_caption(settings.TITLE)
@@ -166,9 +166,3 @@ class Game:
         # check if the string passed in matches the name of a class in the scenes module
         if scene in dir(scenes):
             return eval("scenes." + scene + "(self)")
-
-        # if scene in self.scenes:
-        #     # use an eval to return the scene based on the scene string
-        #     return eval("scenes." + scene + "(self)")
-        # else:
-        #     return scenes.Title(self)
